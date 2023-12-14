@@ -1,0 +1,45 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "cockroachdb"
+  url      = env("DATABASE_URL")
+}
+
+model User{
+  id String @id @default(cuid())
+  username String @unique
+  email String @unique
+  password String
+  image String
+  createdAt DateTime @default(now())
+  answers  Answers[]
+  role String @default("NORMAL")
+}
+
+model Quiz {
+  id String @id @default(cuid())
+  question String @unique
+  answer String
+  type String
+  category String
+  level String
+  createdAt DateTime @default(now())
+  answers  Answers[]
+  choices String[]
+}
+
+model Answers {
+  id String @id @default(cuid())
+  questId String
+  answer String
+  quizId String
+  userId String
+  user               User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  quizz              Quiz @relation(fields: [quizId], references: [id], onDelete: Cascade)
+}
+

@@ -1,0 +1,18 @@
+{
+    "compilerOptions": {
+      "target": "ES2020",
+      "module": "commonjs",
+      "outDir": "./build",
+      "strict": true,
+      "noEmit": false,
+      "esModuleInterop": true,
+      "skipLibCheck": true,
+      "forceConsistentCasingInFileNames": true 
+    },
+    "include" : [
+        "./src/**/*.ts"
+     ],
+     "exclude" : [
+         "./node_modules", "build/**/*"
+     ]
+  }
